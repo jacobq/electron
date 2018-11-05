@@ -1,0 +1,17 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Jacob Quant <jacobq@gmail.com>
+Date: Mon,  5 Nov 2018 14:42:47 -0600
+Subject: dom_storage_limit_increase.patch
+
+
+--- a/src/content/common/dom_storage/dom_storage_types.h
++++ b/src/content/common/dom_storage/dom_storage_types.h
+@@ -21,7 +21,7 @@ typedef std::map<base::string16, base::NullableString16> DOMStorageValuesMap;
+
+ // The quota for each storage area.
+ // This value is enforced in renderer processes and the browser process.
+-const size_t kPerStorageAreaQuota = 10 * 1024 * 1024;
++const size_t kPerStorageAreaQuota = (4 * 1024 * 1024 * 1024) - 1;  // Electron: raise limit from 10MiB to 4GiB
+
+ // In the browser process we allow some overage to
+ // accomodate concurrent writes from different renderers
